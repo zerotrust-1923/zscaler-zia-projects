@@ -1,1 +1,24 @@
+# =============================================================================
+# Zscaler ZIA DLP Manager — Python dependencies
+# =============================================================================
+# Install:  pip install -r requirements.txt
+# Python:   >=3.9
+# =============================================================================
+
+# --- Core HTTP client -----------------------------------------------------
+# Used for all OneAPI calls (auth, GET/PUT/POST/DELETE) and session handling.
+requests>=2.31.0,<3.0.0
+
+# --- Environment / configuration -----------------------------------------
+# Loads ZSCALER_CLIENT_ID, ZSCALER_CLIENT_SECRET, ZSCALER_VANITY_DOMAIN, etc.
+# from a local .env file at runtime.
+python-dotenv>=1.0.0,<2.0.0
+
+# --- Security / TLS hardening --------------------------------------------
+# Pulled in transitively by `requests`, pinned here to ensure modern TLS,
+# certificate validation, and CVE coverage on minimal base images.
+certifi>=2024.2.2
+urllib3>=2.2.1,<3.0.0
+charset-normalizer>=3.3.2,<4.0.0
+idna>=3.7,<4.0.0
 
