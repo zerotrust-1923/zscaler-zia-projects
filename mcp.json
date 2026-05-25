@@ -7,17 +7,17 @@
   "longDescription": "A production-grade skill for the complete lifecycle management of Zscaler ZIA Data Loss Prevention policies. Supports export to CSV/JSON, bulk import from JSON, field-level updates, and safe deletes — with single, multiple, and slab modes (5/10/50/100). Every write operation requires explicit typed confirmation and produces an audit CSV. Authenticates via Zidentity OAuth2 client_credentials.",
   "author": {
     "name": "Ramesh Mani",
-    "email": "rmani@zscaler.com",
-    "url": "https://github.com/<your-username>"
+    "email": "ramesh.mani@zerotrustsolutions.co.in",
+    "url": "https://github.com/zerotrust-1923"
   },
   "license": "MIT",
-  "homepage": "https://github.com/<your-username>/zia-dlp-manager",
+  "homepage": "https://github.com/zerotrust-1923/zia-dlp-manager",
   "repository": {
     "type": "git",
-    "url": "https://github.com/<your-username>/zia-dlp-manager.git"
+    "url": "https://github.com/zerotrust-1923/zia-dlp-manager.git"
   },
   "bugs": {
-    "url": "https://github.com/<your-username>/zia-dlp-manager/issues"
+    "url": "https://github.com/zerotrust-1923/zia-dlp-manager/issues"
   },
   "keywords": [
     "zscaler",
