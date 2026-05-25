@@ -1,1 +1,164 @@
+{
+  "$schema": "https://modelcontextprotocol.io/schema/mcp.json",
+  "name": "zia-dlp-manager",
+  "displayName": "Zscaler ZIA DLP Manager",
+  "version": "1.0.0",
+  "description": "Create, read, update, delete, import, and export Zscaler Internet Access (ZIA) DLP policies via OneAPI.",
+  "longDescription": "A production-grade skill for the complete lifecycle management of Zscaler ZIA Data Loss Prevention policies. Supports export to CSV/JSON, bulk import from JSON, field-level updates, and safe deletes — with single, multiple, and slab modes (5/10/50/100). Every write operation requires explicit typed confirmation and produces an audit CSV. Authenticates via Zidentity OAuth2 client_credentials.",
+  "author": {
+    "name": "Ramesh Mani",
+    "email": "rmani@zscaler.com",
+    "url": "https://github.com/<your-username>"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/<your-username>/zia-dlp-manager",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/<your-username>/zia-dlp-manager.git"
+  },
+  "bugs": {
+    "url": "https://github.com/<your-username>/zia-dlp-manager/issues"
+  },
+  "keywords": [
+    "zscaler",
+    "zia",
+    "dlp",
+    "data-loss-prevention",
+    "oneapi",
+    "zidentity",
+    "policy-management",
+    "security",
+    "compliance",
+    "migration",
+    "backup"
+  ],
+  "categories": [
+    "security",
+    "policy-management",
+    "data-loss-prevention"
+  ],
+  "icon": "assets/icon.png",
+  "runtime": {
+    "language": "python",
+    "version": ">=3.9"
+  },
+  "install": {
+    "command": "pip",
+    "args": ["install", "-r", "requirements.txt"]
+  },
+  "entrypoints": [
+    {
+      "id": "export",
+      "name": "Export DLP Policies",
+      "description": "Export DLP rules, engines, dictionaries, notification templates, ICAP servers, and IDM profiles to CSV and/or JSON.",
+      "command": "python",
+      "args": ["scripts/zia_dlp_export.py"],
+      "destructive": false,
+      "requiresConfirmation": false
+    },
+    {
+      "id": "import",
+      "name": "Import DLP Rules",
+      "description": "Create new DLP rules from a JSON source. Supports single, multiple, and slab modes (50/100/ALL).",
+      "command": "python",
+      "args": ["scripts/zia_dlp_import.py"],
+      "destructive": true,
+      "requiresConfirmation": true,
+      "confirmationToken": "IMPORT"
+    },
+    {
+      "id": "update",
+      "name": "Update DLP Rules",
+      "description": "Update existing DLP rules with field-level allow-listing. Supports single, multiple, and slab modes (5/10/50/100).",
+      "command": "python",
+      "args": ["scripts/zia_dlp_update.py"],
+      "destructive": true,
+      "requiresConfirmation": true,
+      "confirmationToken": "UPDATE"
+    },
+    {
+      "id": "delete",
+      "name": "Delete DLP Rules",
+      "description": "Delete DLP rules safely with double confirmation. Supports single, multiple, and slab modes (5/10/50/100).",
+      "command": "python",
+      "args": ["scripts/zia_dlp_delete.py"],
+      "destructive": true,
+      "requiresConfirmation": true,
+      "confirmationToken": "DELETE"
+    }
+  ],
+  "env": {
+    "ZSCALER_CLIENT_ID": {
+      "description": "OneAPI OAuth2 client ID issued by Zidentity.",
+      "required": true,
+      "secret": true
+    },
+    "ZSCALER_CLIENT_SECRET": {
+      "description": "OneAPI OAuth2 client secret issued by Zidentity.",
+      "required": true,
+      "secret": true
+    },
+    "ZSCALER_VANITY_DOMAIN": {
+      "description": "Tenant vanity domain prefix (the value before .zslogin.net).",
+      "required": true,
+      "secret": false,
+      "example": "acme-prod"
+    },
+    "ZSCALER_API_BASE_URL": {
+      "description": "ZIA OneAPI base URL.",
+      "required": false,
+      "secret": false,
+      "default": "https://api.zsapi.net"
+    },
+    "INPUT_JSON": {
+      "description": "Path to the JSON file used by import, update, and delete operations.",
+      "required": false,
+      "secret": false,
+      "default": "zia_dlp_policies.json"
+    },
+    "EXPORT_FORMAT": {
+      "description": "Export format: csv, json, or both.",
+      "required": false,
+      "secret": false,
+      "default": "both",
+      "enum": ["csv", "json", "both"]
+    },
+    "IMPORT_NAME_SUFFIX": {
+      "description": "Optional suffix appended to imported rule names to avoid duplicates.",
+      "required": false,
+      "secret": false,
+      "default": ""
+    }
+  },
+  "permissions": {
+    "network": {
+      "outbound": [
+        "*.zsapi.net",
+        "*.zslogin.net"
+      ]
+    },
+    "filesystem": {
+      "read": ["./", "./scripts", "./examples"],
+      "write": ["./"]
+    },
+    "secrets": "required"
+  },
+  "safety": {
+    "destructiveOperations": ["import", "update", "delete"],
+    "readOnlyOperations": ["export"],
+    "auditLog": true,
+    "dryRunSupported": true,
+    "confirmationStrategy": "typed-token"
+  },
+  "documentation": {
+    "readme": "README.md",
+    "skillManifest": "SKILL.md",
+    "changelog": "CHANGELOG.md",
+    "examples": "examples/"
+  },
+  "compatibility": {
+    "mcpProtocolVersion": ">=0.1.0",
+    "platforms": ["linux", "darwin", "win32"]
+  }
+}
 
