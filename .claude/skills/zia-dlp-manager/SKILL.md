@@ -5,9 +5,9 @@ version: 1.0.0
 description: Create, read, update, delete, import, and export Zscaler Internet Access (ZIA) DLP policies via OneAPI.
 author: Ramesh Mani
 license: MIT
-homepage: https://github.com/<your-org>/zia-dlp-manager
-repository: https://github.com/<your-org>/zia-dlp-manager
-issues: https://github.com/<your-org>/zia-dlp-manager/issues
+homepage: https://github.com/zerotrust-1923/zia-dlp-manager
+repository: https://github.com/zerotrust-1923/zia-dlp-manager
+issues: https://github.com/zerotrust-1923/zia-dlp-manager/issues
 categories:
   - security
   - policy-management
